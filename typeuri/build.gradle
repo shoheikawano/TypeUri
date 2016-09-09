@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile 'junit:junit:4.12'
+}
+
+// http://stackoverflow.com/questions/37902840/got-unsupported-class-file-version-52-0-after-including-a-module-to-a-project
+sourceCompatibility = 1.7
