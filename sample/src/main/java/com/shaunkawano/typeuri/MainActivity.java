@@ -1,12 +1,10 @@
 package com.shaunkawano.typeuri;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,13 +25,8 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    View focus = getCurrentFocus();
-    if (focus != null) {
-      InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-      imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
-    }
-
     editText = (EditText) findViewById(R.id.sample_edit_text);
+    editText.setText(input = DEFAULT_INPUT);
     editText.addTextChangedListener(new TextWatcher() {
       @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
       }
@@ -46,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    editText.setText(DEFAULT_INPUT);
-
     okButton = (Button) findViewById(R.id.button_ok);
     okButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
@@ -56,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     });
 
     resultText = (TextView) findViewById(R.id.sample_result);
-
-    updateSampleResult();
   }
 
   private void updateSampleResult() {
@@ -70,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     TypeUri typeUri = TypeUri.parse(inputUri);
-    resultText.setText(String.format(Locale.JAPAN,
-        "{\n\t\t" + "\"input\":\"%s\"\n" + "isOpaque=%s\n" + "isAbsolute=%s\n" + "queryMap=%s\n"
-            + "hasQuery=%s\n" + "getQuery=%s\n" + "getRawQuery=%s\n" + "hasEmptyPath=%s\n"
-            + "getPath=%s\n" + "getRawPath=%s\n" + "pathSegments=%s\n" + "getHost=%s\n"
-            + "getRawSchemeSpecificPart=%s\n" + "getSchemeSpecificPart=%s\n",
+    resultText.setText(String.format(Locale.JAPAN, "\n" +
+            "input=%s\n" + "isOpaque=%s\n" + "isAbsolute=%s\n" + "queryMap=%s\n" + "hasQuery=%s\n"
+            + "getQuery=%s\n" + "getRawQuery=%s\n" + "hasEmptyPath=%s\n" + "getPath=%s\n"
+            + "getRawPath=%s\n" + "pathSegments=%s\n" + "getHost=%s\n" + "getRawSchemeSpecificPart=%s\n"
+            + "getSchemeSpecificPart=%s\n",
 
         input, inputUri.isOpaque(), inputUri.isAbsolute(), typeUri.queryMap(), typeUri.hasQuery(),
         typeUri.URI().getQuery(), typeUri.URI().getRawQuery(), typeUri.hasEmptyPath(),
