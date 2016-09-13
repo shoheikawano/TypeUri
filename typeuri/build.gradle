@@ -1,8 +1,18 @@
 apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'junit:junit:4.12'
+}
+
+publish {
+  userOrg = 'shaunkawano'
+  groupId = 'com.shaunkawano'
+  artifactId = 'typeuri'
+  publishVersion = '0.1.0'
+  desc = 'Lightweight Java library for wrapping and distinguishing URI type with ease.'
+  website = 'https://github.com/shaunkawano/typeuri'
 }
 
 // http://stackoverflow.com/questions/37902840/got-unsupported-class-file-version-52-0-after-including-a-module-to-a-project
