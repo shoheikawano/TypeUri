@@ -2,8 +2,7 @@ apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'junit:junit:4.12'
+  testCompile 'junit:junit:4.12'
 }
 
 publish {
