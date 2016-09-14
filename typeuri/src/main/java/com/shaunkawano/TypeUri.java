@@ -33,10 +33,22 @@ public final class TypeUri {
   private final List<String> pathSegments;
   private final Map<String, List<String>> queryMap;
 
+  /**
+   * Creates new {@code TypeUri} by parsing the given {@code uri} argument.
+   *
+   * @param uri {@code URI} to be parsed as {@code TypeUri}.
+   * @return new {@code TypeUri} based on parsing the given {@code uri}.
+   */
   public static TypeUri parse(URI uri) {
     return new TypeUri(uri);
   }
 
+  /**
+   * Creates new {@code TypeUri} by parsing the given {@code url} argument.
+   *
+   * @param url {@code String} url to be parsed as {@code TypeUri}.
+   * @return new {@code TypeUri} based on parsing the given {@code url}.
+   */
   public static TypeUri parse(String url) {
     return new TypeUri(URI.create(url));
   }
@@ -52,47 +64,109 @@ public final class TypeUri {
     }
   }
 
+  /**
+   * Returns the raw {@code URI} that was parsed or created when this class is created.
+   *
+   * @return raw {@code uri} that was parsed or created when this class is created.
+   */
   public URI URI() {
     return uri;
   }
 
+  /**
+   * Returns query map of this {@code TypeUri}.
+   * This is null-safe; it returns an empty map if there is no associated query map.
+   *
+   * @return {@code queryMap} of this {@code TypeUri}.
+   */
   public Map<String, List<String>> queryMap() {
     return queryMap;
   }
 
+  /**
+   * Returns path segments of this {@code TypeUri}.
+   * This is null-safe; it returns an empty list if there is no associated path segments.
+   *
+   * @return {@code pathSegments} of this {@code TypeUri}.
+   */
   public List<String> getPathSegments() {
     return pathSegments;
   }
 
+  /**
+   * Returns whether this {@code TypeUri} has no path segments.
+   *
+   * @return {@code true} if this {@code TypeUri} has empty path segments. {@code false} otherwise.
+   */
   public boolean hasEmptyPath() {
     return pathSegments.isEmpty();
   }
 
+  /**
+   * Returns whether this {@code TypeUri} is network type.
+   * Network type means if the host of this {@code TypeUri} is either "http" or "https".
+   *
+   * @return {@code true} if the host of this {@code TypeUri} is either "http" or "https".
+   * {@code false} otherwise.
+   */
   public boolean isNetwork() {
     String scheme = uri.getScheme();
     return "http".equals(scheme) || "https".equals(scheme);
   }
 
+  /**
+   * Returns whether the host of this {@code TypeUri} is "http".
+   *
+   * @return {@code true} if the host of this {@code TypeUri} is "http". {@code false} otherwise.
+   */
   public boolean isHttp() {
     return "http".equals(uri.getScheme());
   }
 
+  /**
+   * Returns whether the host of this {@code TypeUri} is "https".
+   *
+   * @return {@code true} if the host of this {@code TypeUri} is "https". {@code false} otherwise.
+   */
   public boolean isHttps() {
     return "https".equals(uri.getScheme());
   }
 
+  /**
+   * Returns whether the host of this {@code TypeUri} is the same as the given {@code host}.
+   *
+   * @return {@code true} if the host of this {@code TypeUri} is is the same as the given {@code
+   * host}. {@code false} otherwise.
+   */
   public boolean isHost(String host) {
     return host.equals(uri.getHost());
   }
 
+  /**
+   * Returns whether the scheme of this {@code TypeUri} is the same as the given {@code scheme}.
+   *
+   * @return {@code true} if the scheme of this {@code TypeUri} is is the same as the given {@code
+   * scheme}. {@code false} otherwise.
+   */
   public boolean isScheme(String scheme) {
     return scheme.equals(uri.getScheme());
   }
 
+  /**
+   * Returns whether this {@code TypeUri} has query.
+   *
+   * @return {@code true} if this {@code TypeUri} has query. {@code false} otherwise.
+   */
   public boolean hasQuery() {
     return uri.getQuery() != null;
   }
 
+  /**
+   * Returns whether this {@code TypeUri} has the given {@code query}.
+   *
+   * @return {@code true} if this {@code TypeUri} has the given {@code query}. {@code false}
+   * otherwise.
+   */
   public boolean hasQuery(String query) {
     if (queryMap == null || queryMap.isEmpty()) {
       return false;
@@ -101,6 +175,12 @@ public final class TypeUri {
     return queryMap.containsKey(query);
   }
 
+  /**
+   * Returns whether this {@code TypeUri} contains the given {@code queryMap}.
+   *
+   * @return {@code true} if this {@code TypeUri} contains the given {@code queryMap}. {@code false}
+   * otherwise.
+   */
   public boolean containsQueryMap(Map<String, String> queryMap) {
     if (queryMap == null || queryMap.isEmpty()) {
       return false;
@@ -115,6 +195,13 @@ public final class TypeUri {
     return false;
   }
 
+  /**
+   * Returns whether this {@code TypeUri} contains the given {@code queryKey} and {@code
+   * queryValue} map.
+   *
+   * @return {@code true} if this {@code TypeUri} contains the given ontains the given {@code
+   * queryKey} and {@code queryValue} map.
+   */
   public boolean containsQueryMap(String queryKey, String queryValue) {
     List<String> queryValues = queryMap.get(queryKey);
     if (queryValues == null || queryValues.isEmpty()) {
