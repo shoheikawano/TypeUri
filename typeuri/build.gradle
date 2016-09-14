@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.shaunkawano'
 
 dependencies {
   testCompile 'junit:junit:4.12'
