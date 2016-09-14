@@ -23,7 +23,7 @@ Download via Maven:
 <dependency>
   <groupId>com.shaunkawano</groupId>
   <artifactId>typeuri</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
@@ -37,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.shaunkawano:typeuri:0.1.1'
+  compile 'com.shaunkawano:typeuri:0.2.0'
 }
 ```
 
